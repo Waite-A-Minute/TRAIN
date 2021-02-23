@@ -42,45 +42,47 @@ node = node.read()
 node = node.split("\n")
 node = [item.split(",") for item in node if node]
 while thistrain != endnode:
-    for station, arrivetime, leavetime in node:
+   
+    for station,leavetime , arrivetime in node:
         if x > len(node)-1:
              print("There are no more trains")
              print(node)
-             currentnode = node[x-4] +'.txt' 
+             currentnode = station +'.txt' 
              print("currentnode:",currentnode)
              x=1          
-        current_line = 1
-        # print("node 1:",node[x])
-        print("current time:",current_time)
-        print("station:", node[x-1],node[x])
-        print("currentnode:",currentnode)
         
+  
         else:
             #checking if the train time is after the current time
-            if int(current_time)< int(node[x]):   
+            if int(current_time)< int(leavetime):   
+                
+                #print statments to monitor progress
                 print("x",x)
                 print("fastesttrain",fastestrain)
                 print("currentnode",currentnode)
-                #working out how long that train will take
-                thistrain=node[x+1]
+                print("current time:",current_time)
+                print("station being looked at:", station,"leavetime", leavetime)
+                print("currentnode:",currentnode)    
                 
+
                 #Checking if the destination is an option
-                print ("node[x]:",node[x])
-                print ("node[x+1]:",node[x+1])
-                print ("node[x-1]:",node[x-1])
-                if node[x-1] ==endnode:
+                if station ==endnode:
                     print("Found the endnode",endnode)
                     break
-                
+                else:
+                    print("This aint it Chief")
+                    
+                   #working out what the shortest time is    
                 if int(thistrain)<int(fastestrain):
                     fastestrain = thistrain
                     previousstation = currentnode
-                #working out what the shortest time is
-                x=x+3
+                    
+             #moving onto the next line in the file
+                x=x+1
                 #break
             else:
-                print("nope")
-                x = x+3
+                print("Leaves too soon")
+                x = x+1
                 print("x", x)
     else:
         print("done")
